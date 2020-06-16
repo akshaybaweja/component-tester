@@ -1,8 +1,8 @@
 {
 	"name": "component-tester",
 	"productName": "Component Tester",
-	"version": "0.0.0",
-	"description": "My supreme app",
+	"version": "0.0.1",
+	"description": "Component Tester GUI",
 	"license": "MIT",
 	"repository": "akshaybaweja/component-tester",
 	"author": {
@@ -25,11 +25,14 @@
 		"electron-store": "^5.1.0",
 		"electron-unhandled": "^3.0.0",
 		"electron-updater": "^4.0.6",
-		"electron-util": "^0.13.0"
+		"electron-util": "^0.13.0",
+		"serialport": "^9.0.0",
+		"tableify": "^1.1.0"
 	},
 	"devDependencies": {
 		"electron": "^7.1.1",
 		"electron-builder": "^21.2.0",
+		"electron-rebuild": "^1.11.0",
 		"np": "^5.0.3",
 		"xo": "^0.25.3"
 	},
@@ -47,7 +50,7 @@
 		"appId": "com.akshaybaweja.component-tester",
 		"mac": {
 			"category": "public.app-category.social-networking",
-			"darkModeSupport": true
+			"darkModeSupport": false
 		},
 		"dmg": {
 			"iconSize": 160,

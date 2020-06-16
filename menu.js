@@ -1,6 +1,10 @@
 'use strict';
 const path = require('path');
-const {app, Menu, shell} = require('electron');
+const {
+	app,
+	Menu,
+	shell
+} = require('electron');
 const {
 	is,
 	appMenu,
@@ -45,8 +49,7 @@ ${debugInfo()}`;
 ];
 
 if (!is.macos) {
-	helpSubmenu.push(
-		{
+	helpSubmenu.push({
 			type: 'separator'
 		},
 		aboutMenuItem({
@@ -56,8 +59,7 @@ if (!is.macos) {
 	);
 }
 
-const debugSubmenu = [
-	{
+const debugSubmenu = [{
 		label: 'Show Settings',
 		click() {
 			config.openInEditor();
@@ -91,20 +93,17 @@ const debugSubmenu = [
 ];
 
 const macosTemplate = [
-	appMenu([
-		{
-			label: 'Preferences…',
-			accelerator: 'Command+,',
-			click() {
-				showPreferences();
-			}
+	appMenu([{
+		label: 'Preferences…',
+		accelerator: 'Command+,',
+		click() {
+			showPreferences();
 		}
-	]),
+	}]),
 	{
 		role: 'fileMenu',
-		submenu: [
-			{
-				label: 'Custom'
+		submenu: [{
+				label: 'Refresh Serial Ports'
 			},
 			{
 				type: 'separator'
@@ -130,12 +129,10 @@ const macosTemplate = [
 ];
 
 // Linux and Windows
-const otherTemplate = [
-	{
+const otherTemplate = [{
 		role: 'fileMenu',
-		submenu: [
-			{
-				label: 'Custom'
+		submenu: [{
+				label: 'Refresh Serial Ports'
 			},
 			{
 				type: 'separator'

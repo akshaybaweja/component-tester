@@ -1,18 +1,31 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Component Tester</title>
-		<link rel="stylesheet" href="index.css">
-	</head>
-	<body>
-		<div class="container">
-			<header>
-				<h1>Component Tester</h1>
-				<p></p>
-			</header>
-			<section class="main"></section>
-			<footer></footer>
+
+<head>
+	<meta charset="utf-8">
+	<title>Component Tester</title>
+	<link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+	<main class="container">
+		<div class="header">
+			<h1>Component Tester</h1>
+			<h5>version 0.0.1</h5>
 		</div>
-	</body>
+		<section class="serial-port-section">
+			<select class="custom-select" id="serial-port-list">
+				<option selected="">Select Serial Port</option>
+			</select>
+		</section>
+		<section class="main">
+			<div class="component">CAPACITOR</div>
+			<hr class="my-4">
+			<div class="values">100 nF</div>
+		</section>
+		<button id="testButton" type="button" class="btn btn-primary btn-lg btn-block">T E S T</button>
+		<footer>Copyright Akshay Baweja &copy; 2020</footer>
+	</main>
+</body>
+<script src="./static/scripts/index.js"></script>
 </html>
