@@ -1,0 +1,75 @@
+{
+	"name": "component-tester",
+	"productName": "Component Tester",
+	"version": "0.0.0",
+	"description": "My supreme app",
+	"license": "MIT",
+	"repository": "akshaybaweja/component-tester",
+	"author": {
+		"name": "Akshay Baweja",
+		"email": "akshaybaweja.1996@gmail.com",
+		"url": "https://akshaybaweja.com"
+	},
+	"scripts": {
+		"postinstall": "electron-builder install-app-deps",
+		"lint": "xo",
+		"test": "npm run lint",
+		"start": "electron .",
+		"pack": "electron-builder --dir",
+		"dist": "electron-builder --macos --linux --windows",
+		"release": "np"
+	},
+	"dependencies": {
+		"electron-context-menu": "^0.15.0",
+		"electron-debug": "^3.0.0",
+		"electron-store": "^5.1.0",
+		"electron-unhandled": "^3.0.0",
+		"electron-updater": "^4.0.6",
+		"electron-util": "^0.13.0"
+	},
+	"devDependencies": {
+		"electron": "^7.1.1",
+		"electron-builder": "^21.2.0",
+		"np": "^5.0.3",
+		"xo": "^0.25.3"
+	},
+	"xo": {
+		"envs": [
+			"node",
+			"browser"
+		]
+	},
+	"np": {
+		"publish": false,
+		"releaseDraft": false
+	},
+	"build": {
+		"appId": "com.akshaybaweja.component-tester",
+		"mac": {
+			"category": "public.app-category.social-networking",
+			"darkModeSupport": true
+		},
+		"dmg": {
+			"iconSize": 160,
+			"contents": [
+				{
+					"x": 180,
+					"y": 170
+				},
+				{
+					"x": 480,
+					"y": 170,
+					"type": "link",
+					"path": "/Applications"
+				}
+			]
+		},
+		"linux": {
+			"target": [
+				"AppImage",
+				"deb"
+			],
+			"category": "Network;Chat"
+		}
+	}
+}
