@@ -53,23 +53,24 @@ const initTest = () => {
 
 // TouchBar Test Button
 const testTouchbarButton = new TouchBarButton({
-	label: "Begin Test",
+	label: "TEST",
 	click: initTest,
+	backgroundColor: "#FF0000",
 	enabled: true,
 })
 
 const componentName = new TouchBarLabel({
-	label: "Capacitor",
+	label: "Press the TEST button to begin",
 	textColor: "#FFFF00"
 })
 
 const componentValue = new TouchBarLabel({
-	label: "100nF",
+	label: "",
 	textColor: "#FFFFFF"
 })
 
 const componetInfo = new TouchBarLabel({
-	label: "1 -||- 2",
+	label: "",
 	textColor: "#aad576"
 })
 
