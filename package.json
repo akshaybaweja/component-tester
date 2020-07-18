@@ -49,7 +49,7 @@
 		"releaseDraft": false
 	},
 	"build": {
-		"appId": "com.akshaybaweja.component-tester",
+		"appId": "com.akshaybaweja.ctester",
 		"publish": {
 			"provider": "github",
 			"releaseType": "release"

@@ -30,7 +30,8 @@ unhandled();
 debug();
 contextMenu();
 
-app.setAppUserModelId(packageJson.build.appId);
+const appId = 'com.akshaybaweja.ctester';
+app.setAppUserModelId(appId);
 
 // Uncomment this before publishing your first version.
 // It's commented out as it throws an error if there are no published versions.
