@@ -17,6 +17,9 @@
 		"start": "electron .",
 		"pack": "electron-builder --dir",
 		"dist": "electron-builder --macos --linux --windows",
+		"dist-mac": "electron-builder --macos",
+		"dist-win": "electron-builder --windows",
+		"dist-linux": "electron-builder --linux",
 		"release": "np"
 	},
 	"dependencies": {
@@ -32,7 +35,6 @@
 	"devDependencies": {
 		"electron": "^7.1.1",
 		"electron-builder": "^21.2.0",
-		"electron-rebuild": "^1.11.0",
 		"np": "^5.0.3",
 		"xo": "^0.25.3"
 	},
