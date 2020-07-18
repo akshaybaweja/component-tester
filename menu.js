@@ -3,7 +3,8 @@ const path = require('path');
 const {
 	app,
 	Menu,
-	shell
+	shell,
+	BrowserWindow
 } = require('electron');
 const {
 	is,
@@ -15,14 +16,15 @@ const {
 } = require('electron-util');
 const config = require('./config');
 
-const showPreferences = () => {
-	// Show the app's preferences here
+const refreshSerialPorts = () => {
+	const currentWindow = BrowserWindow.getFocusedWindow();
+	currentWindow.webContents.send('refreshSerialPorts');
 };
 
 const helpSubmenu = [
 	openUrlMenuItem({
 		label: 'Website',
-		url: 'https://ctester.akshaybaweja.com'
+		url: 'http://ctester.akshaybaweja.com'
 	}),
 	openUrlMenuItem({
 		label: 'Source Code',
@@ -50,74 +52,65 @@ ${debugInfo()}`;
 
 if (!is.macos) {
 	helpSubmenu.push({
-			type: 'separator'
-		},
-		aboutMenuItem({
-			icon: path.join(__dirname, 'static', 'icon.png'),
-			text: 'Created by Akshay Baweja'
-		})
-	);
+		type: 'separator'
+	}, aboutMenuItem({
+		icon: path.join(__dirname, 'static', 'icon.png'),
+		text: 'Designed by Akshay Baweja'
+	}));
 }
 
 const debugSubmenu = [{
-		label: 'Show Settings',
-		click() {
-			config.openInEditor();
-		}
-	},
-	{
-		label: 'Show App Data',
-		click() {
-			shell.openItem(app.getPath('userData'));
-		}
-	},
-	{
-		type: 'separator'
-	},
-	{
-		label: 'Delete Settings',
-		click() {
-			config.clear();
-			app.relaunch();
-			app.quit();
-		}
-	},
-	{
-		label: 'Delete App Data',
-		click() {
-			shell.moveItemToTrash(app.getPath('userData'));
-			app.relaunch();
-			app.quit();
-		}
+	label: 'Show Settings',
+	click() {
+		config.openInEditor();
 	}
-];
+},
+{
+	label: 'Show App Data',
+	click() {
+		shell.openItem(app.getPath('userData'));
+	}
+},
+{
+	type: 'separator'
+},
+{
+	label: 'Delete Settings',
+	click() {
+		config.clear();
+		app.relaunch();
+		app.quit();
+	}
+},
+{
+	label: 'Delete App Data',
+	click() {
+		shell.moveItemToTrash(app.getPath('userData'));
+		app.relaunch();
+		app.quit();
+	}
+}];
 
 const macosTemplate = [
-	appMenu([{
-		label: 'Preferences…',
-		accelerator: 'Command+,',
-		click() {
-			showPreferences();
-		}
-	}]),
+	appMenu([openUrlMenuItem({
+		label: 'Designed by Akshay Baweja',
+		url: 'https://akshaybaweja.com'
+	})]),
 	{
 		role: 'fileMenu',
 		submenu: [{
-				label: 'Refresh Serial Ports'
-			},
-			{
-				type: 'separator'
-			},
-			{
-				role: 'close'
+			label: 'Refresh Serial Ports',
+			accelerator: 'Command+E',
+			click() {
+				refreshSerialPorts();
 			}
-		]
-	},
-	{
-		role: 'editMenu'
-	},
-	{
-		role: 'viewMenu'
+		},
+		{
+			type: 'separator'
+		},
+		{
+			role: 'close'
+		}]
 	},
 	{
 		role: 'windowMenu'
@@ -130,39 +123,32 @@ const macosTemplate = [
 
 // Linux and Windows
 const otherTemplate = [{
-		role: 'fileMenu',
-		submenu: [{
-				label: 'Refresh Serial Ports'
-			},
-			{
-				type: 'separator'
-			},
-			{
-				label: 'Settings',
-				accelerator: 'Control+,',
-				click() {
-					showPreferences();
-				}
-			},
-			{
-				type: 'separator'
-			},
-			{
-				role: 'quit'
-			}
-		]
+	role: 'fileMenu',
+	submenu: [{
+		label: 'Refresh Serial Ports',
+		accelerator: 'Control+E',
+		click() {
+			refreshSerialPorts();
+		}
 	},
 	{
-		role: 'editMenu'
+		type: 'separator'
+	},
+	openUrlMenuItem({
+		label: 'Designed by Akshay Baweja',
+		url: 'https://akshaybaweja.com'
+	}),
+	{
+		type: 'separator'
 	},
 	{
-		role: 'viewMenu'
-	},
-	{
-		role: 'help',
-		submenu: helpSubmenu
-	}
-];
+		role: 'quit'
+	}]
+},
+{
+	role: 'help',
+	submenu: helpSubmenu
+}];
 
 const template = process.platform === 'darwin' ? macosTemplate : otherTemplate;
 

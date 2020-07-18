@@ -7,7 +7,7 @@
 	"repository": "akshaybaweja/component-tester",
 	"author": {
 		"name": "Akshay Baweja",
-		"email": "akshaybaweja.1996@gmail.com",
+		"email": "contact@akshaybaweja.com",
 		"url": "https://akshaybaweja.com"
 	},
 	"scripts": {
@@ -48,9 +48,14 @@
 	},
 	"build": {
 		"appId": "com.akshaybaweja.component-tester",
+		"publish": {
+			"provider": "github",
+			"releaseType": "release"
+		},
 		"mac": {
-			"category": "public.app-category.social-networking",
-			"darkModeSupport": false
+			"category": "public.app-category.utilities",
+			"darkModeSupport": false,
+			"type": "development"
 		},
 		"dmg": {
 			"iconSize": 160,
@@ -72,7 +77,12 @@
 				"AppImage",
 				"deb"
 			],
-			"category": "Network;Chat"
+			"category": "Utility;Engineering"
+		},
+		"win": {
+			"target": "nsis",
+			"icon": "build/icon.ico",
+			"verifyUpdateCodeSignature": false
 		}
 	}
 }

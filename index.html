@@ -11,7 +11,7 @@
 	<main class="container">
 		<div class="header">
 			<h1>Component Tester</h1>
-			<h5>version 0.0.1</h5>
+			<h5>SW version <span id="sw-version"></span> &emsp; HW version <span id="version-number">-</span></h5>
 		</div>
 		<section class="serial-port-section">
 			<select class="custom-select" id="serial-port-list">
@@ -19,13 +19,53 @@
 			</select>
 		</section>
 		<section class="main">
-			<div class="component">CAPACITOR</div>
-			<hr class="my-4">
-			<div class="values">100 nF</div>
+			<div class="component" id="component-name"></div>
+			<hr class="my-1">
+			<div class="values" id="component-value"></div>
+			<div class="values-label" id="component-value-label"></div>
+			<div class="otherInfo">
+				<hr class="my-2">
+				<div class="badges">
+					<span class="info badge badge-dark"></span>
+					<span class="info badge badge-dark"></span>
+					<span class="info badge badge-dark"></span>
+					<span class="info badge badge-dark"></span>
+				</div>
+			</div>
+		</section>
+		<section class="pinout">
+			<svg viewBox="0 0 150 18" xmlns="http://www.w3.org/2000/svg" id="pinoutSVG">
+				<style>
+					@font-face {
+						font-family: dataOutputFont;
+						src: url(./static/fonts/DMMono.ttf);
+					}
+
+					.svgText {
+						font: normal 3px 'dataOutputFont';
+					}
+				</style>
+				<g transform="translate(38, 7)">
+					<circle id="pin1_base" r="5" fill="#f7f7f9" />
+					<circle id="pin1_open" r="3" fill="#f7f7f9" />
+					<text id="pin1_text" baseline-shift="-8px" class="svgText" letter-spacing="0.2" text-anchor="middle"></text>
+				</g>
+				<g transform="translate(75, 7)">
+					<circle id="pin2_base" r="5" fill="#f7f7f9" />
+					<circle id="pin2_open" r="3" fill="#f7f7f9" />
+					<text id="pin2_text" baseline-shift="-8px" class="svgText" letter-spacing="0.2" text-anchor="middle"></text>
+				</g>
+				<g transform="translate(112, 7)">
+					<circle id="pin3_base" r="5" fill="#f7f7f9" />
+					<circle id="pin3_open" r="3" fill="#f7f7f9" />
+					<text id="pin3_text" baseline-shift="-8px" class="svgText" letter-spacing="0.2" text-anchor="middle"></text>
+				</g>
+			</svg>
 		</section>
 		<button id="testButton" type="button" class="btn btn-primary btn-lg btn-block">T E S T</button>
-		<footer>Copyright Akshay Baweja &copy; 2020</footer>
+		<!-- <footer>Copyright Akshay Baweja &copy; 2020</footer> -->
 	</main>
 </body>
-<script src="./static/scripts/index.js"></script>
+<script src="./scripts/index.js"></script>
+
 </html>

@@ -71,13 +71,15 @@ section {
 	display: block;
 }
 
-footer {
+/* footer {
 	position: fixed;
 	left: 0;
-	bottom: 10px;
+	bottom: 0;
+	padding-bottom: 10px;
 	width: 100%;
 	text-align: center;
-}
+	background-color: white;
+} */
 
 body {
 	margin: 0;
@@ -11895,7 +11897,7 @@ th {
 }
 
 .serial-port-section {
-	margin-bottom: 50px;
+	margin-bottom: 20px;
 }
 
 .serial-port-select {
@@ -11910,7 +11912,15 @@ th {
 .values {
 	text-align: center;
 	font-family: 'dataOutputFont';
-	font-size: 10rem;
+	font-size: 8rem;
+	color: var(--primary);
+}
+
+.values-label {
+	text-align: center;
+	font-family: 'dataOutputFont';
+	font-size: 3rem;
+	display: none;
 }
 
 .component {
@@ -11921,10 +11931,35 @@ th {
 
 .main {
 	background-color: #f7f7f9;
+	visibility: hidden;
+}
+
+.otherInfo {
+	text-align: center;
+	padding-bottom: 1em;
+	display: none;
 }
 
 #testButton {
-	margin-bottom: 2em;
-	margin-top: 2em;
+	margin-bottom: 1em;
+	margin-top: .5em;
 	font-size: 3rem;
+	visibility: hidden;
+}
+
+.info {
+	display: none;
+	font-size: 1.3rem;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.badges {
+	margin-top: 1em;
+}
+
+.pinout {
+	margin-top: 1em;
+	background-color: #f7f7f9;
+	display: none;
 }
