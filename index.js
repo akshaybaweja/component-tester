@@ -21,7 +21,6 @@ const debug = require('electron-debug');
 const contextMenu = require('electron-context-menu');
 const config = require('./config');
 const menu = require('./menu');
-const packageJson = require('./package.json');
 
 // Serial Port Require
 const SerialPort = require('serialport');
