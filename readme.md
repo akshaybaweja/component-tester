@@ -4,7 +4,7 @@
 - Firmware Files
     - [USB Component Tester](Firmware/USB-Component-Tester)
 - Gerber Files (For PCB Production)
-    - [USB Component Tester](Hardware/USB-Component-Tester/Component_Tester_Tiny_PCBWay.zip)
+    - [USB Component Tester](Hardware/USB-Component-Tester/GerberFiles.zip)
 
 ## Screenshots (with TouchBar Support)
 **Welcome Screen** - prompts user to select Serial Port of Component Tester to begin testing
