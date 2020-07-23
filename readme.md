@@ -7,20 +7,20 @@
     - [USB Component Tester](Gerber-Files/USB-Component-Tester/Component_Tester_Tiny_PCBWay.zip)
 
 ## Screenshots (with TouchBar Support)
+**Welcome Screen** - prompts user to select Serial Port of Component Tester to begin testing
 ![](./Screenshots/1.png)
 ![](./Screenshots/11.png)
-**Welcome Screen** - prompts user to select Serial Port of Component Tester to begin testing
 
-![](./Screenshots/2.png)
 *Selecting Serial Port*
+![](./Screenshots/2.png)
 
+Once the correct serial port is connected it shows up a **TEST** button on screen and as well as on TouchBar *(only mac users)*. Also, shows the hardware version for Component Tester.
 ![](./Screenshots/3.png)
 ![](./Screenshots/31.png)
-Once the correct serial port is connected it shows up a **TEST** button on screen and as well as on TouchBar *(only mac users)*. Also, shows the hardware version for Component Tester.
 
+*Testing Screens*
 ![](./Screenshots/4.png)
 ![](./Screenshots/41.png)
-*Testing Screens*
 
 
 ---
@@ -29,19 +29,13 @@ Once the correct serial port is connected it shows up a **TEST** button on scree
 ### Component Test Results
 ![](./Screenshots/5.png)
 ![](./Screenshots/51.png)
-
 ---
-
 ![](./Screenshots/6.png)
 ![](./Screenshots/61.png)
-
 ---
-
 ![](./Screenshots/7.png)
 ![](./Screenshots/71.png)
-
 ---
-
 ![](./Screenshots/8.png)
 ![](./Screenshots/81.png)
 
