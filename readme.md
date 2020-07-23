@@ -1,6 +1,10 @@
 # Component Tester
 
-> USB Version
+## Resources
+- Firmware Files
+    - [USB Component Tester](Firmware/USB-Component-Tester)
+- Gerber Files (For PCB Production)
+    - [USB Component Tester](Gerber-Files/USB-Component-Tester/Component_Tester_Tiny_PCBWay.zip)
 
 ## Screenshots (with TouchBar Support)
 ![](./Screenshots/1.png)
