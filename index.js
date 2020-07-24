@@ -147,6 +147,10 @@ const setPinout = async () => {
 					return 'Drain';
 				case 'x':
 					return 'ACTIVE';
+				case '1':
+					return (componentID === '33' ? 'MT1' : 'B1');
+				case '2':
+					return (componentID === '33' ? 'MT2' : 'B2');
 				case '-':
 					return '';
 				default: return null;
