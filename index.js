@@ -185,7 +185,7 @@ const setPinout = async () => {
 				case 'Y':
 					return '#ffd23f';
 				case 'W':
-					return '#fffcf2';
+					return '#e5e5e5';
 				default:
 					return '#98c1d9';
 			}
