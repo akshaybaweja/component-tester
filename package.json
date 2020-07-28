@@ -1,7 +1,7 @@
 {
 	"name": "component-tester",
 	"productName": "Component Tester",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Component Tester GUI",
 	"license": "MIT",
 	"repository": "akshaybaweja/component-tester",
