@@ -7,7 +7,9 @@ const {
 	ipcMain,
 	Notification,
 	TouchBar,
-	screen
+	screen,
+	powerSaveBlocker,
+	dialog
 } = require('electron');
 
 // Uncomment before publishing
@@ -44,6 +46,8 @@ if (!is.development) {
 
 	autoUpdater.checkForUpdates();
 }
+
+powerSaveBlocker.start('prevent-app-suspension');
 
 // Prevent window from being garbage collected
 let mainWindow;
@@ -120,7 +124,7 @@ const touchBar = new TouchBar({
 const communicate = async portCommand => {
 	return new Promise(resolve => {
 		let bufferData = null;
-		port.write('\n\r' + portCommand + '\r\n');
+		port.write('\r\n' + portCommand + '\r\n');
 		port.once('data', data => {
 			bufferData = Buffer.from(data).toString();
 			port.flush();
@@ -309,13 +313,32 @@ const resetFields = () => {
 	mainWindow.webContents.send('resetPinout');
 };
 
+/* RESET APP
 const resetApp = () => {
+	mainWindow.reload();
 	resetFields();
 	mainWindow.webContents.send('hideTestButton');
 	mainWindow.webContents.send('hideInfoBox');
+	mainWindow.webContents.send('swVersion', app.getVersion());
 	mainWindow.webContents.send('version', '-');
 	mainWindow.webContents.send('refreshSerialPorts');
 	mainWindow.setTouchBar(preTouchBar);
+};
+*/
+
+const resetApp = () => {
+	dialog.showMessageBoxSync(mainWindow, {
+		type: 'info',
+		buttons: ['OK'],
+		title: 'Component Tester Switched OFF',
+		message: 'Component Tester is safe to eject.\nRe-plug to begin testing again.',
+		detail: 'The Application will restart proceeding this.\n\nIf you do not see your serial port, npm testpress Ctrl+E (Windows and Linux) or Cmd+E(macOS)'
+	});
+
+	app.relaunch({
+		args: process.argv.slice(1).concat(['--relaunch'])
+	});
+	app.quit();
 };
 
 function beginTest() {
@@ -351,9 +374,13 @@ function beginTest() {
 }
 
 function switchOFFtester() {
-	if (port.isOpen) {
-		port.close();
-	}
+	communicate(config.get('serialCommands.turnOFFTester'))
+		.then(status => {
+			if (status === 'OK' && port.isOpen) {
+				port.flush();
+				port.close();
+			}
+		});
 }
 
 let w = 800;
@@ -374,7 +401,7 @@ const createMainWindow = async () => {
 		},
 		minimizable: true,
 		fullscreenable: true,
-		fullscreen: false,
+		fullscreen: true,
 		titleBarStyle: 'hiddenInset'
 	});
 
@@ -468,17 +495,26 @@ ipcMain.on('selectedportName', (_, arg) => {
 		port.on('open', () => {
 			communicate(config.get('serialCommands.getVersion'))
 				.then(getVersion => {
-					mainWindow.webContents.send('version', getVersion);
-					touchbarVersionInfo.label = getVersion;
+					if (getVersion !== 'ERR' && getVersion[0] === 'v') {
+						mainWindow.webContents.send('version', getVersion);
+						touchbarVersionInfo.label = getVersion;
 
-					communicate(config.get('serialCommands.getProbeColors'))
-						.then(result => {
-							probeColors = result.split('');
+						communicate(config.get('serialCommands.getProbeColors'))
+							.then(result => {
+								probeColors = result.split('');
+							});
+
+						touchbarComponentName.label = '';
+						mainWindow.setTouchBar(touchBar);
+						mainWindow.webContents.send('showTestButton');
+					} else {
+						const commError = new Notification({
+							title: 'Error Communicating with Tester',
+							body: 'Plug out then re-plug the component tester and try again'
 						});
+						commError.show();
+					}
 				});
-			touchbarComponentName.label = '';
-			mainWindow.setTouchBar(touchBar);
-			mainWindow.webContents.send('showTestButton');
 		});
 
 		port.on('close', () => {
