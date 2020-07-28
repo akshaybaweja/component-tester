@@ -57,6 +57,10 @@ ipc.on('showTestButton', () => {
 	testBtnGrp.style.visibility = 'visible';
 });
 
+ipc.on('hideTestButton', () => {
+	testBtnGrp.style.visibility = 'hidden';
+});
+
 ipc.on('setTestButtonText', (_, arg) => {
 	testButton.textContent = arg;
 });
@@ -73,6 +77,10 @@ ipc.on('enableTestButton', () => {
 
 ipc.on('showInfoBox', () => {
 	infoBox.style.visibility = 'visible';
+});
+
+ipc.on('hideInfoBox', () => {
+	infoBox.style.visibility = 'hidden';
 });
 
 ipc.on('addParameter', (_, name, value) => {

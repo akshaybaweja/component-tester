@@ -11,7 +11,9 @@ const {
 } = require('electron');
 
 // Uncomment before publishing
-const {autoUpdater} = require('electron-updater');
+const {
+	autoUpdater
+} = require('electron-updater');
 
 const {
 	is
@@ -153,7 +155,8 @@ const setPinout = async () => {
 					return (componentID === '33' ? 'MT2' : 'B2');
 				case '-':
 					return '';
-				default: return null;
+				default:
+					return null;
 			}
 		});
 
@@ -306,6 +309,15 @@ const resetFields = () => {
 	mainWindow.webContents.send('resetPinout');
 };
 
+const resetApp = () => {
+	resetFields();
+	mainWindow.webContents.send('hideTestButton');
+	mainWindow.webContents.send('hideInfoBox');
+	mainWindow.webContents.send('version', '-');
+	mainWindow.webContents.send('refreshSerialPorts');
+	mainWindow.setTouchBar(preTouchBar);
+};
+
 function beginTest() {
 	touchbarTestButton.label = 'Testing...';
 	mainWindow.webContents.send('setTestButtonText', 'T E S T I N G . . .');
@@ -362,7 +374,7 @@ const createMainWindow = async () => {
 		},
 		minimizable: true,
 		fullscreenable: true,
-		fullscreen: true,
+		fullscreen: false,
 		titleBarStyle: 'hiddenInset'
 	});
 
@@ -454,26 +466,24 @@ ipcMain.on('selectedportName', (_, arg) => {
 
 		port.open();
 		port.on('open', () => {
+			communicate(config.get('serialCommands.getVersion'))
+				.then(getVersion => {
+					mainWindow.webContents.send('version', getVersion);
+					touchbarVersionInfo.label = getVersion;
+
+					communicate(config.get('serialCommands.getProbeColors'))
+						.then(result => {
+							probeColors = result.split('');
+						});
+				});
 			touchbarComponentName.label = '';
 			mainWindow.setTouchBar(touchBar);
 			mainWindow.webContents.send('showTestButton');
 		});
 
 		port.on('close', () => {
-			app.relaunch();
-			app.exit();
+			resetApp();
 		});
-
-		communicate(config.get('serialCommands.getVersion'))
-			.then(getVersion => {
-				mainWindow.webContents.send('version', getVersion);
-				touchbarVersionInfo.label = getVersion;
-
-				communicate(config.get('serialCommands.getProbeColors'))
-					.then(result => {
-						probeColors = result.split('');
-					});
-			});
 	}
 });
 
