@@ -3,6 +3,8 @@ const option = document.querySelector('#serial-port-list');
 const testButton = document.querySelector('#testButton');
 const infoBox = document.querySelector('.main');
 const componentName = document.querySelector('#component-name');
+const switchOffButton = document.querySelector('#switchOffButton');
+const testBtnGrp = document.querySelector('.testButtonGroup');
 
 // Calls to Backend
 option.addEventListener('change', () => {
@@ -11,6 +13,10 @@ option.addEventListener('change', () => {
 
 testButton.addEventListener('click', () => {
 	ipc.send('beginTest');
+});
+
+switchOffButton.addEventListener('click', () => {
+	ipc.send('switchOffTester');
 });
 
 // Calls from Backend
@@ -48,7 +54,7 @@ ipc.on('disableComponentValueLabel', () => {
 });
 
 ipc.on('showTestButton', () => {
-	testButton.style.visibility = 'visible';
+	testBtnGrp.style.visibility = 'visible';
 });
 
 ipc.on('setTestButtonText', (_, arg) => {
@@ -57,10 +63,12 @@ ipc.on('setTestButtonText', (_, arg) => {
 
 ipc.on('disableTestButton', () => {
 	testButton.disabled = true;
+	switchOffButton.disabled = true;
 });
 
 ipc.on('enableTestButton', () => {
 	testButton.disabled = false;
+	switchOffButton.disabled = false;
 });
 
 ipc.on('showInfoBox', () => {

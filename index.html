@@ -4,7 +4,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>Component Tester</title>
-	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="static/css/index.css">
+	<link rel="stylesheet" href="static/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -62,8 +63,10 @@
 				</g>
 			</svg>
 		</section>
-		<button id="testButton" type="button" class="btn btn-primary btn-lg btn-block">T E S T</button>
-		<!-- <footer>Copyright Akshay Baweja &copy; 2020</footer> -->
+		<div class="btn-group-lg testButtonGroup" role="group">
+			<button id="testButton" type="button" class="btn btn-primary">T E S T</button>
+			<button id="switchOffButton" type="button" class="btn btn-primary"><i class="fa fa-lg fa-power-off" aria-hidden="true"></i></button
+		</div>
 	</main>
 </body>
 <script src="./scripts/index.js"></script>

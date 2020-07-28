@@ -362,6 +362,7 @@ const createMainWindow = async () => {
 		},
 		minimizable: true,
 		fullscreenable: true,
+		fullscreen: true,
 		titleBarStyle: 'hiddenInset'
 	});
 
@@ -482,4 +483,8 @@ ipcMain.on('beginTest', () => {
 
 ipcMain.on('reloadSerialPorts', () => {
 	populateSerialPorts();
+});
+
+ipcMain.on('switchOffTester', () => {
+	switchOFFtester();
 });

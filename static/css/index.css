@@ -11940,11 +11940,27 @@ th {
 	display: none;
 }
 
+.testButtonGroup{
+	display: flex !important;
+	flex-direction: row !important;
+	visibility: hidden;
+}
+
 #testButton {
+	flex: 7;
 	margin-bottom: 1em;
 	margin-top: .5em;
 	font-size: 3rem;
-	visibility: hidden;
+	margin-right: .1em;
+	
+}
+
+#switchOffButton {
+	flex: 1;
+	margin-bottom: 1em;
+	margin-top: .5em;
+	font-size: 3rem;
+	margin-left: .1em;
 }
 
 .info {
