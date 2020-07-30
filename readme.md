@@ -1,5 +1,10 @@
 # Component Tester
 
+<div float="left">
+<a href="https://www.producthunt.com/posts/usb-component-tester?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-usb-component-tester" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=224511&theme=dark" alt="USB Component Tester - Test any electronic component with this tiny usb tester | Product Hunt Embed" style="width: 250px; height: 54px;" width="250px" height="54px" /></a>
+<a href="https://www.tindie.com/stores/akshaybaweja/?ref=offsite_badges&utm_source=sellers_akshaybaweja&utm_medium=badges&utm_campaign=badge_small"><img src="https://d2ss6ovg47m0r5.cloudfront.net/badges/tindie-smalls.png" alt="I sell on Tindie" width="200" height="55"></a>
+</div>
+
 ## Resources
 - Firmware Files
     - [USB Component Tester](Firmware/USB-Component-Tester)
