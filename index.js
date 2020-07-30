@@ -401,7 +401,7 @@ const createMainWindow = async () => {
 		},
 		minimizable: true,
 		fullscreenable: true,
-		fullscreen: true,
+		fullscreen: false,
 		titleBarStyle: 'hiddenInset'
 	});
 
@@ -475,12 +475,49 @@ const populateSerialPorts = () => {
 	populateSerialPorts();
 })();
 
+const initTester = () => {
+	communicate(config.get('serialCommands.getVersion'))
+		.then(getVersion => {
+			if (getVersion !== 'ERR' && getVersion[0] === 'v') {
+				mainWindow.webContents.send('version', getVersion);
+				touchbarVersionInfo.label = getVersion;
+
+				communicate(config.get('serialCommands.getProbeColors'))
+					.then(result => {
+						probeColors = result.split('');
+					});
+
+				touchbarComponentName.label = '';
+				mainWindow.setTouchBar(touchBar);
+				mainWindow.webContents.send('showTestButton');
+			} else {
+				const commError = new Notification({
+					title: 'Error Communicating with Tester',
+					body: 'Plug out then re-plug the component tester and try again'
+				});
+				commError.show();
+			}
+		});
+}
+
 ipcMain.on('selectedportName', (_, arg) => {
 	if (arg !== 'Select Serial Port') {
 		port = new SerialPort(arg, {
 			baudRate: 9600,
+			dataBits: 8,
+			stopBits: 1,
+			parity: 'none',
 			parser: new SerialPort.parsers.Readline(),
 			autoOpen: false
+		});
+
+		port.open();
+		port.on('open', () => {
+			initTester();
+		});
+
+		port.on('close', () => {
+			resetApp();
 		});
 
 		port.on('error', err => {
@@ -489,36 +526,6 @@ ipcMain.on('selectedportName', (_, arg) => {
 				body: err.message
 			});
 			serialPortError.show();
-		});
-
-		port.open();
-		port.on('open', () => {
-			communicate(config.get('serialCommands.getVersion'))
-				.then(getVersion => {
-					if (getVersion !== 'ERR' && getVersion[0] === 'v') {
-						mainWindow.webContents.send('version', getVersion);
-						touchbarVersionInfo.label = getVersion;
-
-						communicate(config.get('serialCommands.getProbeColors'))
-							.then(result => {
-								probeColors = result.split('');
-							});
-
-						touchbarComponentName.label = '';
-						mainWindow.setTouchBar(touchBar);
-						mainWindow.webContents.send('showTestButton');
-					} else {
-						const commError = new Notification({
-							title: 'Error Communicating with Tester',
-							body: 'Plug out then re-plug the component tester and try again'
-						});
-						commError.show();
-					}
-				});
-		});
-
-		port.on('close', () => {
-			resetApp();
 		});
 	}
 });
