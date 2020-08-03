@@ -498,7 +498,7 @@ const initTester = () => {
 				commError.show();
 			}
 		});
-}
+};
 
 ipcMain.on('selectedportName', (_, arg) => {
 	if (arg !== 'Select Serial Port') {
